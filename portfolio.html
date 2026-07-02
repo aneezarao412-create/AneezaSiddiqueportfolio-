@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aneeza Siddique — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF8EE;
+    --coral:#FF6B4A;
+    --coral-deep:#E5502F;
+    --teal:#0E7C74;
+    --teal-deep:#0A5E58;
+    --sun:#FFC857;
+    --plum:#241A33;
+    --plum-soft:#5B4E6E;
+    --lavender:#EFE4FB;
+    --mint:#DBF3E8;
+    --peach:#FFE7D9;
+    --sky:#DFF0FA;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--plum);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{ font-family:'Baloo 2',sans-serif; margin:0; }
+  .label{ font-family:'Space Mono',monospace; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 28px; }
+
+  /* ---------- confetti dots bg ---------- */
+  .dots{
+    position:absolute; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      radial-gradient(circle, var(--sun) 3px, transparent 3.5px),
+      radial-gradient(circle, var(--teal) 2.5px, transparent 3px),
+      radial-gradient(circle, var(--coral) 2.5px, transparent 3px);
+    background-size: 140px 140px, 190px 190px, 165px 165px;
+    background-position: 20px 30px, 90px 120px, 50px 200px;
+    opacity:.35;
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    position:relative;
+    padding: 76px 0 60px;
+    background: var(--peach);
+    overflow:hidden;
+  }
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    filter: blur(0px);
+    z-index:0;
+  }
+  .blob1{ width:420px; height:420px; background:var(--sun); opacity:.55; top:-160px; right:-140px; border-radius:44% 56% 63% 37% / 41% 49% 51% 59%; }
+  .blob2{ width:260px; height:260px; background:var(--teal); opacity:.18; bottom:-100px; left:-80px; border-radius:60% 40% 30% 70% / 60% 40% 60% 40%; }
+
+  .hero-inner{ position:relative; z-index:2; display:flex; align-items:center; gap:46px; flex-wrap:wrap; }
+  .avatar{
+    width:150px; height:150px; border-radius:50%;
+    background: var(--coral);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Baloo 2',sans-serif; font-weight:800; font-size:52px; color:#fff;
+    border: 6px solid #fff;
+    box-shadow: 0 10px 0 rgba(36,26,51,0.12);
+    flex-shrink:0;
+    transform: rotate(-4deg);
+  }
+  .hero-text{ flex:1; min-width:280px; }
+  .eyebrow-tag{
+    display:inline-block;
+    font-family:'Space Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:.06em;
+    background:var(--plum);
+    color:#fff;
+    padding:6px 14px;
+    border-radius:999px;
+    transform: rotate(-2deg);
+    margin-bottom:14px;
+  }
+  h1.name{
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    font-weight:800;
+    line-height:1.02;
+    margin-bottom:10px;
+  }
+  .role-stickers{ display:flex; flex-wrap:wrap; gap:10px; margin: 14px 0 20px; }
+  .sticker{
+    font-family:'Space Mono',monospace;
+    font-size:.78rem;
+    font-weight:700;
+    padding:7px 16px;
+    border-radius:999px;
+    border: 2.5px solid var(--plum);
+    background:#fff;
+    box-shadow: 3px 3px 0 var(--plum);
+  }
+  .sticker.c1{ background:var(--coral); color:#fff; transform:rotate(-2deg); }
+  .sticker.c2{ background:var(--teal); color:#fff; transform:rotate(1.5deg); }
+  .sticker.c3{ background:var(--sun); color:var(--plum); transform:rotate(-1deg); }
+
+  .hero-summary{ max-width:56ch; font-size:1.02rem; color:var(--plum-soft); }
+
+  .contact-row{ margin-top:22px; display:flex; gap:14px; flex-wrap:wrap; }
+  .pill-link{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:.85rem;
+    text-decoration:none;
+    color:var(--plum);
+    background:#fff;
+    padding:9px 18px;
+    border-radius:999px;
+    border:2px solid var(--plum);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .pill-link:hover{ transform: translateY(-3px); box-shadow: 0 6px 0 var(--plum); }
+
+  /* ---------- WAVE DIVIDER ---------- */
+  .wave{ display:block; width:100%; height:60px; margin-top:-2px; }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ position:relative; padding: 58px 0; }
+  .section-head{ display:flex; align-items:center; gap:14px; margin-bottom:30px; }
+  .section-badge{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:700;
+    font-size:1.7rem;
+    padding: 6px 22px;
+    border-radius: 16px;
+    display:inline-block;
+    transform: rotate(-1.4deg);
+    box-shadow: 4px 4px 0 rgba(36,26,51,0.15);
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .track-label{
+    font-family:'Space Mono',monospace;
+    font-weight:700;
+    font-size:.76rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    margin: 26px 0 14px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .track-label:first-of-type{ margin-top:0; }
+  .track-dot{ width:10px; height:10px; border-radius:50%; }
+
+  .card-grid{ display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+  .exp-card{
+    background:#fff;
+    border-radius:20px;
+    padding:18px 20px;
+    border: 2.5px solid var(--plum);
+    box-shadow: 5px 5px 0 rgba(36,26,51,0.12);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .exp-card:hover{ transform: translateY(-4px) rotate(-0.4deg); box-shadow: 7px 8px 0 rgba(36,26,51,0.18); }
+  .exp-role{ font-weight:700; font-size:1.02rem; margin-bottom:2px; }
+  .exp-org{ color:var(--plum-soft); font-size:.9rem; margin-bottom:8px; }
+  .exp-date{
+    display:inline-block;
+    font-family:'Space Mono',monospace;
+    font-size:.72rem;
+    font-weight:700;
+    padding:3px 10px;
+    border-radius:999px;
+    background:var(--sky);
+    color:var(--teal-deep);
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skill-cloud{ display:flex; flex-wrap:wrap; gap:12px; }
+  .skill-chip{
+    font-family:'Baloo 2',sans-serif;
+    font-weight:600;
+    font-size:1rem;
+    padding:10px 22px;
+    border-radius:999px;
+    border:2.5px solid var(--plum);
+    box-shadow: 3px 3px 0 var(--plum);
+  }
+
+  /* ---------- CERTIFICATES sticker wall ---------- */
+  .cert-wall{ display:grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap:14px; }
+  .cert-card{
+    border-radius:16px;
+    padding:14px 16px;
+    font-size:.88rem;
+    background:#fff;
+    border:2px dashed var(--plum-soft);
+  }
+  .cert-name{ font-weight:700; display:block; margin-bottom:2px; }
+  .cert-org{ font-family:'Space Mono',monospace; font-size:.72rem; color:var(--coral-deep); }
+
+  /* ---------- VOLUNTEER + PROJECTS shared card look ---------- */
+  .info-card{
+    background:#fff;
+    border-radius:20px;
+    padding:18px 20px;
+    border: 2.5px solid var(--plum);
+    box-shadow: 5px 5px 0 rgba(36,26,51,0.12);
+  }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-list{ display:flex; flex-direction:column; gap:12px; }
+  .edu-row{
+    display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+    flex-wrap:wrap;
+    padding: 14px 18px;
+    background:#fff;
+    border-radius:14px;
+    border-left: 6px solid var(--coral);
+  }
+  .edu-degree{ font-weight:700; }
+  .edu-school{ color:var(--plum-soft); font-size:.88rem; display:block; }
+  .edu-years{ font-family:'Space Mono',monospace; font-size:.76rem; color:var(--teal-deep); white-space:nowrap; }
+
+  /* ---------- LANG / INTERESTS ---------- */
+  .twocol{ display:grid; grid-template-columns: 1fr 1fr; gap:20px; }
+  .mini-card{
+    background:#fff; border-radius:18px; padding:18px 20px;
+    border:2.5px solid var(--plum);
+  }
+  .mini-card h3{ font-size:1.05rem; margin-bottom:10px; }
+  .tag-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .tag{
+    font-family:'Space Mono',monospace; font-size:.74rem; font-weight:700;
+    padding:5px 12px; border-radius:999px; background:var(--lavender); color:var(--plum);
+  }
+
+  /* ---------- FOOTER / CTA ---------- */
+  footer{ position:relative; background:var(--plum); color:#fff; padding:70px 0 60px; overflow:hidden; }
+  footer .blob{ opacity:.15; }
+  .footer-inner{ position:relative; z-index:2; text-align:center; }
+  footer h2{ font-size:clamp(2rem,5vw,2.8rem); margin-bottom:14px; }
+  footer p.sub{ color:#D8CFE8; max-width:52ch; margin:0 auto 26px; }
+  .cta-row{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:26px; }
+  .cta-btn{
+    font-family:'Baloo 2',sans-serif; font-weight:700; font-size:1rem;
+    text-decoration:none; padding:12px 26px; border-radius:999px;
+  }
+  .cta-btn.primary{ background:var(--sun); color:var(--plum); box-shadow:4px 4px 0 var(--coral); }
+  .cta-btn.secondary{ background:transparent; color:#fff; border:2.5px solid #fff; }
+  .social-row{ display:flex; justify-content:center; gap:16px; flex-wrap:wrap; font-family:'Space Mono',monospace; font-size:.8rem; }
+  .social-row a{ color:#D8CFE8; text-decoration:none; }
+  .social-row a:hover{ color:#fff; }
+  .colophon{ margin-top:30px; font-size:.72rem; color:#8B7FA3; font-family:'Space Mono',monospace; }
+
+  /* reveal animation */
+  .reveal{ opacity:0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  @media (max-width:720px){
+    .hero-inner{ flex-direction:column; text-align:center; align-items:center; }
+    .contact-row, .role-stickers, .cta-row, .social-row{ justify-content:center; }
+    .twocol{ grid-template-columns:1fr; }
+    .section-badge{ font-size:1.35rem; }
+    .edu-years{ flex:1 0 100%; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+    .reveal{ opacity:1; transform:none; }
+  }
+  :focus-visible{ outline:3px solid var(--coral); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="dots"></div>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="wrap hero-inner">
+    <div class="avatar">AS</div>
+    <div class="hero-text">
+      <span class="eyebrow-tag">★ PORTFOLIO — ISLAMABAD, PAKISTAN</span>
+      <h1 class="name">Aneeza Siddique</h1>
+      <div class="role-stickers">
+        <span class="sticker c1">Qur'an Teacher</span>
+        <span class="sticker c2">Digital Marketer</span>
+        <span class="sticker c3">Content Creator</span>
+      </div>
+      <p class="hero-summary">Teaching and marketing might look like different worlds, but four years of doing both point to the same skill: knowing your audience and meeting them where they are. That's meant leading Qur'an, Urdu, English, and Math classrooms across Islamabad, and separately building Rao Times Gallery from an idea into a working venture as founder and CEO. An English Literature degree keeps the writing sharp; ongoing study in Arabic, Qur'an, and psychology keeps the curiosity active.</p>
+      <div class="contact-row">
+        <a class="pill-link" href="mailto:aneezarao08@gmail.com">✉ aneezarao08@gmail.com</a>
+        <a class="pill-link" href="tel:+92465759836">📞 +92 465 759836</a>
+      </div>
+    </div>
+  </div>
+</header>
+<svg class="wave" viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C300,70 900,-10 1200,30 L1200,60 L0,60 Z" fill="var(--paper)"/></svg>
+
+<main class="wrap">
+
+  <section id="experience" class="reveal">
+    <div class="section-head">
+      <span class="section-badge" style="background:var(--coral); color:#fff;">Experience</span>
+    </div>
+
+    <div class="track-label" style="color:var(--teal-deep);"><span class="track-dot" style="background:var(--teal);"></span>Teaching</div>
+    <div class="card-grid">
+      <div class="exp-card"><p class="exp-role">Qur'an Teacher</p><p class="exp-org">Fatima Public School and College, Burma Town, Islamabad</p><span class="exp-date">2024 — Present</span></div>
+      <div class="exp-card"><p class="exp-role">Qur'an Teacher</p><p class="exp-org">Alhuda International University (Online)</p><span class="exp-date">2023 — 2024</span></div>
+      <div class="exp-card"><p class="exp-role">Urdu Teacher (Alternate)</p><p class="exp-org">Fatima Public School and College, Burma Town, Islamabad</p><span class="exp-date">Nov — Dec 2022</span></div>
+      <div class="exp-card"><p class="exp-role">Mathematics Teacher (Alternate)</p><p class="exp-org">Islamic International University School, Bani Gala Campus, Islamabad</p><span class="exp-date">Aug — Sep 2020</span></div>
+      <div class="exp-card"><p class="exp-role">English Teacher (Alternate)</p><p class="exp-org">Fatima Public School and College, Burma Town, Islamabad</p><span class="exp-date">Oct 2020</span></div>
+    </div>
+
+    <div class="track-label" style="color:var(--coral-deep);"><span class="track-dot" style="background:var(--coral);"></span>Digital Marketing &amp; Business</div>
+    <div class="card-grid">
+      <div class="exp-card"><p class="exp-role">Digital Marketer &amp; Content Creator</p><p class="exp-org">Dawah Warrior</p><span class="exp-date">2025 — Present</span></div>
+      <div class="exp-card"><p class="exp-role">CEO / Digital Marketer</p><p class="exp-org">Rao Times Gallery</p><span class="exp-date">2019 — 2022</span></div>
+      <div class="exp-card"><p class="exp-role">Digital Marketer</p><p class="exp-org">Learn Online Qur'an Education</p><span class="exp-date">2020 — 2021</span></div>
+      <div class="exp-card"><p class="exp-role">Marketing Advertiser</p><p class="exp-org">WEBWAR Co. Ltd.</p><span class="exp-date">Aug — Nov 2020</span></div>
+    </div>
+  </section>
+
+  <section id="skills" class="reveal">
+    <div class="section-head">
+      <span class="section-badge" style="background:var(--sun); color:var(--plum);">Skills</span>
+    </div>
+    <div class="skill-cloud">
+      <span class="skill-chip" style="background:var(--peach);">MS Word</span>
+      <span class="skill-chip" style="background:var(--mint);">MS Excel</span>
+      <span class="skill-chip" style="background:var(--sky);">MS PowerPoint</span>
+      <span class="skill-chip" style="background:var(--lavender);">Canva</span>
+      <span class="skill-chip" style="background:var(--peach);">Digital Marketing</span>
+    </div>
+  </section>
+
+  <section id="projects" class="reveal">
+    <div class="section-head">
+      <span class="section-badge" style="background:var(--teal); color:#fff;">Projects</span>
+    </div>
+    <div class="card-grid">
+      <div class="info-card">
+        <p class="exp-role">Rao Times Gallery</p>
+        <p class="exp-org">Founder &amp; digital marketer — an online gallery and marketing venture</p>
+        <span class="exp-date">2019 — 2022</span>
+      </div>
+      <div class="info-card">
+        <p class="exp-role">Marketing Advertiser</p>
+        <p class="exp-org">WEBWAR Co. Ltd.</p>
+        <span class="exp-date">Aug — Nov 2020</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="volunteer" class="reveal">
+    <div class="section-head">
+      <span class="section-badge" style="background:var(--lavender); color:var(--plum);">Volunteer Work</span>
+    </div>
+    <div class="card-grid">
+      <div class="info-card">
+        <p class="exp-role">Brand Representative</p>
+        <p class="exp-org">Alkhidmat Foundation</p>
+        <span class="exp-date">2022 — 2023</span>
+      </div>
+      <div class="info-card">
+        <p class="exp-role">Brand Representative</p>
+        <p class="exp-org">IFMSA</p>
+        <span class="exp-date">Jan — May 2020</span>
+      </div>
+      <div class="info-card">
+        <p class="exp-role">Brand Representative; Qur'an Teacher &amp; Operations Manager</p>
+        <p class="exp-org">The Scholars</p>
+        <span class="exp-date">2022 — Present</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="certificates" class="reveal">
+    <div class="section-head">
+      <span class="section-badge" style="background:var(--mint); color:var(--teal-deep);">Certificates</span>
+    </div>
+    <div class="cert-wall">
+      <div class="cert-card"><span class="cert-name">Digital Marketing</span><span class="cert-org">Digi Skills</span></div>
+      <div class="cert-card"><span class="cert-name">Freelancing</span><span class="cert-org">Digi Skills</span></div>
+      <div class="cert-card"><span class="cert-name">Applicative Qur'anic Language</span><span class="cert-org">Almidrar Institute</span></div>
+      <div class="cert-card"><span class="cert-name">Understanding of Qur'an</span><span class="cert-org">Rehman Foundation</span></div>
+      <div class="cert-card"><span class="cert-name">Tafseer ul Qur'an</span><span class="cert-org">IOU</span></div>
+      <div class="cert-card"><span class="cert-name">Emotional Intelligence</span><span class="cert-org">IOU</span></div>
+      <div class="cert-card"><span class="cert-name">NLP</span><span class="cert-org">Alhadid Institute</span></div>
+      <div class="cert-card"><span class="cert-name">TPI Methodology, Qur'an Learning Teachers Training</span><span class="cert-org">Character Education Foundation</span></div>
+      <div class="cert-card"><span class="cert-name">TPI for Teachers Training</span><span class="cert-org">Alhuda</span></div>
+      <div class="cert-card"><span class="cert-name">Islam and Qur'an</span><span class="cert-org">Furqan Studios</span></div>
+      <div class="cert-card"><span class="cert-name">Professional Development Webinars (20)</span><span class="cert-org">Oxford University Press</span></div>
+    </div>
+  </section>
+
+  <section id="education" class="reveal">
+    <div class="section-head">
+      <span class="section-badge" style="background:var(--sky); color:var(--teal-deep);">Education</span>
+    </div>
+    <div class="edu-list">
+      <div class="edu-row"><div><span class="edu-degree">Qur'an, Arabic &amp; Psychology</span><span class="edu-school">Ruyaai</span></div><span class="edu-years">2025 — Present</span></div>
+      <div class="edu-row"><div><span class="edu-degree">BS English Language &amp; Literature</span><span class="edu-school">Allama Iqbal Open University</span></div><span class="edu-years">2022 — 2026</span></div>
+      <div class="edu-row"><div><span class="edu-degree">Taddabbur ul Qur'an</span><span class="edu-school">Alhuda International University</span></div><span class="edu-years">2022 — 2023</span></div>
+      <div class="edu-row"><div><span class="edu-degree">Taleem ul Qur'an</span><span class="edu-school">Alhuda International University</span></div><span class="edu-years">2021 — 2022</span></div>
+      <div class="edu-row"><div><span class="edu-degree">Intermediate — FSc Pre-Engineering</span><span class="edu-school">Islamabad College for Girls, F-6/2</span></div><span class="edu-years">2017 — 2019</span></div>
+      <div class="edu-row"><div><span class="edu-degree">Matriculation — Science</span><span class="edu-school">Islamabad Model School for Girls, I-8/1</span></div><span class="edu-years">2015 — 2017</span></div>
+    </div>
+  </section>
+
+  <section id="more" class="reveal">
+    <div class="twocol">
+      <div class="mini-card">
+        <h3>🗣️ Languages</h3>
+        <div class="tag-row">
+          <span class="tag">English</span>
+          <span class="tag">Urdu</span>
+          <span class="tag">Punjabi</span>
+          <span class="tag">Arabic</span>
+        </div>
+      </div>
+      <div class="mini-card">
+        <h3>💛 Interests</h3>
+        <div class="tag-row">
+          <span class="tag">Book Reading</span>
+          <span class="tag">Digital Marketing</span>
+          <span class="tag">Editing</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="dots" style="opacity:.1;"></div>
+  <div class="blob blob1" style="top:auto; bottom:-180px; right:-120px;"></div>
+  <div class="wrap footer-inner">
+    <h2>Let's build something together.</h2>
+    <p class="sub">Open to jobs and roles in education, HR, content, or marketing — somewhere that needs strong writing, organizing, and people skills in equal measure.</p>
+    <div class="cta-row">
+      <a class="cta-btn primary" href="mailto:aneezarao08@gmail.com">✉ Email Aneeza</a>
+      <a class="cta-btn secondary" href="tel:+92465759836">📞 Call Now</a>
+    </div>
+    <div class="social-row">
+      <a href="https://www.linkedin.com/in/aneeza-rao-88b244417" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.instagram.com/dawah_warrior_academy" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <p class="colophon">References available on request. Jaba Taili, Islamabad, Pakistan.</p>
+  </div>
+</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, { threshold: 0.12 });
+  els.forEach(el=> io.observe(el));
+</script>
+
+</body>
+</html>
